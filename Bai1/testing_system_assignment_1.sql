@@ -14,7 +14,9 @@ create table position  (
 
 create table account (
 	account_id int auto_increment primary key,
-    username varchar(50),
+    email varchar(100) not null unique,
+    user_name varchar(50) not null unique,
+    full_name varchar(50) not null,
     department_id int,
     position_id int,
     create_date date,
@@ -24,7 +26,7 @@ create table account (
     
 create table GroupTable (
 	group_id int auto_increment primary key,
-    group_name varchar(50),
+    group_name varchar(50) not null,
     creator_id int,
     create_date date,
     foreign key (creator_id) references account (account_id)
@@ -41,17 +43,17 @@ create table group_account (
 
 create table type_question (	
 	type_id int auto_increment primary key,
-	type_name varchar(50)
+	type_name varchar(50) not null
     );	
 
 create table category_question (
 	category_id int auto_increment primary key,
-    category_name varchar(50)
+    category_name varchar(50) not null
     );
     
 create table question (
 	question_id int auto_increment primary key,
-    content text,
+    content text not null,
     category_id int,
     type_id int,
     creator_id int,
@@ -63,7 +65,7 @@ create table question (
 
 create table answer (
 	answer_id int auto_increment primary key,
-    content text,
+    content text not null,
     question_id int,
     isCorrect boolean,
     foreign key (question_id) references question (question_id)
